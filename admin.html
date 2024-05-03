@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 800px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+        }
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            color: #ccc;
+        }
+        .list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .list li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .list li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#user-list">User List</a>
+        <a href="#form-submissions">Form Submissions</a>
+    </div>
+    <div class="container">
+        <h2 id="user-list">User List</h2>
+        <ul id="user-list-ul" class="list">
+        </ul>
+        <h2 id="form-submissions">Form Submissions</h2>
+        <ul id="form-submissions-ul" class="list">
+        </ul>
+    </div>
+
+    <script>
+        let users = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : {};
+        let submissions = localStorage.getItem('submissions') ? JSON.parse(localStorage.getItem('submissions')) : [];
+
+        let userListUl = document.getElementById('user-list-ul');
+        for (let user in users) {
+            let listItem = document.createElement('li');
+            listItem.innerHTML = `Username: ${user}, Password: ${users[user]}`;
+            userListUl.appendChild(listItem);
+        }
+
+        let formSubmissionsUl = document.getElementById('form-submissions-ul');
+        for (let i = 0; i < submissions.length; i++) {
+            let listItem = document.createElement('li');
+            listItem.innerHTML = `Name: ${submissions[i].name}, Email: ${submissions[i].email}, Phone: ${submissions[i].phone}, Message: ${submissions[i].message}`;
+            formSubmissionsUl.appendChild(listItem);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 300px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .form-group input[type="text"], .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-group button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="header">Sign up</h2>
+        <form id="signup-form">
+            <div class="form-group">
+                <label for="new-username">Username:</label>
+                <input type="text" id="new-username" name="new-username">
+            </div>
+            <div class="form-group">
+                <label for="new-password">Password:</label>
+                <input type="password" id="new-password" name="new-password">
+            </div>
+            <div class="form-group">
+                <button type="submit">Sign up</button>
+            </div>
+            <p id="signup-error"></p>
+            <p>Already have an account? <a href="index.html" id="login-link">Login</a></p>
+        </form>
+    </div>
+
+    <script>
+        let users = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : {};
+
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            let newUsername = document.getElementById('new-username').value;
+            let newPassword = document.getElementById('new-password').value;
+            if (newUsername && newPassword) {
+                users[newUsername] = newPassword;
+                localStorage.setItem('users', JSON.stringify(users));
+                document.getElementById('signup-error').innerHTML = 'Sign up successful!';
+                window.location.href = 'lindex.html';
+            } else {
+                document.getElementById('signup-error').innerHTML = 'Please fill in all fields';
+            }
+        });
+    </script>
+</body>
+</html>
